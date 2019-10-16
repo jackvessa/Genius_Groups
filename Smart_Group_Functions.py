@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+from sklearn.cluster import KMeans
 
 # csv_file = 'Data/Exam 2_ Tissues (Closed EB) Quiz Student Analysis Report.csv'
 # csv_file = 'Data/Exam 1_ Part 2 Quiz Student Analysis Report.csv'
@@ -76,7 +77,7 @@ def normalize_df(df):
         if np.min(x) != np.max(x) else x)
 
 
-def generate_optimized_groups(student_df, num_iter = 100, num_groups = 6, Homogeneous = True):
+def generate_optimized_groups(student_df, num_iter = 100, num_groups = 6, Homogeneous = 0):
     '''
 
     Parameters
@@ -87,17 +88,18 @@ def generate_optimized_groups(student_df, num_iter = 100, num_groups = 6, Homoge
     num_groups : int
         Number of groups to divide students into
     Homogeneous : bool
-        If True, create homogeneous (similar) groups.
-        If False, create heterogeneous (different) groups
+        If True, create Homogeneous (similar) groups.
+        If False, create Heterogeneous (different) groups
 
     Returns
     -------
     Optimal Groups
     '''
     index_list = list(student_df.index)
-    if Homogeneous:
+
+    if Homogeneous == 0:
         ideal_loss = 9999
-    else:
+    elif Homogeneous == 1:
         ideal_loss = 0
     num_students = len(student_df)
 
@@ -124,11 +126,12 @@ def generate_optimized_groups(student_df, num_iter = 100, num_groups = 6, Homoge
 
             total_loss += group_loss
 
-        if Homogeneous and total_loss < ideal_loss:
+        if Homogeneous == 0 and total_loss < ideal_loss:
             ideal_loss = total_loss
             best_group = group_set
             print("New Best Homogeneous Group Loss:", ideal_loss)
-        elif not Homogeneous and total_loss > ideal_loss:
+
+        elif Homogeneous == 1 and total_loss > ideal_loss:
             ideal_loss = total_loss
             best_group = group_set
             print("New Best Heterogeneous Group Loss:", ideal_loss)
@@ -139,10 +142,33 @@ def generate_optimized_groups(student_df, num_iter = 100, num_groups = 6, Homoge
 
 
     for i,g in enumerate(best_group):
-        print("Group",i)
+        print("Group",i+1)
         print(student_df.loc[set(g)]['score'],"\n")
 
     return best_group
+
+def add_clusters(df, num_clusters=6):
+    '''
+    Add Clusters
+    '''
+    kmeans = KMeans(num_clusters)
+    kmeans.fit(df)
+    cluster = kmeans.predict(df)
+    df['Cluster'] = cluster
+    return df
+
+
+def return_cluster_list(df,num_clusters=6):
+    '''
+    Return a List of Clustered Students
+    '''
+    cluster_list = []
+
+    for i in range(num_clusters):
+        cluster_list.append(list(df[df['Cluster']==i].index))
+
+    return cluster_list
+
 
 if __name__ == "__main__":
     student_df = clean_file(csv_file,sectionID)
