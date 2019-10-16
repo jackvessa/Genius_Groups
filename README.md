@@ -1,5 +1,7 @@
 # Smart Groups
 
+## Project Motivation
+
 Teachers have countless tasks to complete and very limited time to do so. This project aims to tackle the very important (and very time consuming) task of effectively grouping students. Providing teachers with a simple tool to create groups of students using insights driven by data can help them spend more time planning engaging lessons and creating personalized education experiences.
 
 ## Getting Started
