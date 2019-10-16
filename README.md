@@ -12,7 +12,7 @@ Additionally, having data-driven insights to inform this process is invaluable.
 
 The goal of this project is to create a web tool that enables teachers to use data to quickly group students in real-time.
 
-### Grouping Considerations and inputs
+## Grouping Considerations and inputs
 
 CSV File
 ```
