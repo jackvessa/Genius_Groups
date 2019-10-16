@@ -50,7 +50,7 @@ def group():
         if section_id is not None and num_groups is not None and homogeneous_bool is not None:
             student_df = clean_file(data_frame,section_id)
             student_df = normalize_df(student_df)
-            result = generate_optimized_groups(student_df, num_groups = num_groups,num_iter = 30, Homogeneous=homogeneous_bool)
+            result = generate_optimized_groups(student_df, num_groups = num_groups,num_iter = 300, Homogeneous=homogeneous_bool)
             groups_string = ""
             for i,val in enumerate(result):
                 groups_string += "<br/>Group " + str(i+1) + ":<br/>"
