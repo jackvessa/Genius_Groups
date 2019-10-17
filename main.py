@@ -111,7 +111,7 @@ def group():
 
 
 @app.route('/group_all/', methods=["GET", "POST"])
-def group():
+def group_all():
     errors = ""
 
     if request.method == "POST":
