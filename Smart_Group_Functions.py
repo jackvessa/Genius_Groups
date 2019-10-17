@@ -50,15 +50,19 @@ def clean_file(dataframe,sectionID):
     ---------
     Pandas DataFrame (Cleaned)
     '''
+    sectionID = str(sectionID)
+
     df = dataframe
     df.set_index(keys=df['name'],inplace=True)
+
+    df['section'] = df.section.str.extract('(\d+)')
+    df = df[df['section']==sectionID]
+
     df = df.select_dtypes(exclude=['object','bool'])
 
-    df.drop(columns=['id','section_sis_id','attempt'],inplace=True)
+    df.drop(columns=['id','section_sis_id','attempt','section_id'],inplace=True)
 
-    class_df = df[df['section_id']==sectionID]
-
-    return class_df
+    return df
 
 
 def normalize_df(df):

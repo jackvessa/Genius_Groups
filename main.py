@@ -93,7 +93,7 @@ def group():
                     <p>Upload the CSV Here:</p>
                     <input type="file" name="data_file" />
 
-                    <p>Enter the Section ID Here:</p>
+                    <p>Enter the Section (Class Period) Here:</p>
                     <p><input name="section_id" /></p>
 
                     <p>Choose Number of Groups to Form:</p>
