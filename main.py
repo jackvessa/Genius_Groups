@@ -241,7 +241,7 @@ def cluster():
             for i,val in enumerate(result):
                 groups_string += "<br/>Cluster " + str(i+1) + ":<br/>"
                 groups_string += str(list(val)) + "<br/>"
-                groups_string += ("Average Cluster " + str(i+1) + " Score: " +
+                groups_string += ("Average Score: " +
                     str(round(np.mean(student_df.loc[val]['score'])*100,2)) +"%<br/>")
             return '''
                 <html>
