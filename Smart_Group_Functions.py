@@ -162,6 +162,7 @@ def clean_file_all_assignments(dataframe,sectionID):
     ---------
     Pandas DataFrame (Cleaned)
     '''
+    sectionID = str(sectionID)
     df = dataframe
     df.drop(df.index[0], inplace=True)
 
