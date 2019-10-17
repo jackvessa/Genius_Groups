@@ -267,7 +267,7 @@ def cluster():
                     <p>Upload the CSV Here:</p>
                     <input type="file" name="data_file" />
 
-                    <p>Enter the Section ID Here:</p>
+                    <p>Enter the Section (Class Period) Here:</p>
                     <p><input name="section_id" /></p>
 
                     <p>Choose Number of Clusters to Form:</p>
@@ -279,6 +279,82 @@ def cluster():
             </body>
         </html>
     """
+
+
+@app.route('/cluster_all/', methods=["GET", "POST"])
+def cluster_all():
+    errors = ""
+
+    if request.method == "POST":
+
+        section_id = None
+        num_clusters = None
+        data_frame = None
+
+        file = request.files['data_file']
+        if not file:
+            return "No file"
+        tempfile_path = tempfile.NamedTemporaryFile().name
+        file.save(tempfile_path)
+        data_frame = pd.read_csv(tempfile_path, encoding='latin-1')
+
+        try:
+            section_id = int(request.form["section_id"])
+        except:
+            errors += "<p>{!r} is not a number!</p>\n".format(request.form["section_id"])
+        try:
+            num_clusters = int(request.form["num_clusters"])
+        except:
+            errors += "<p>{!r} is not a number!</p>\n".format(request.form["num_clusters"])
+
+        if section_id is not None and num_clusters is not None:
+            student_df = clean_file_all_assignments(data_frame,section_id)
+            student_df = normalize_df(student_df)
+            student_df = add_clusters(student_df, num_clusters = num_clusters)
+            result = return_cluster_list(student_df, num_clusters)
+            groups_string = ""
+            for i,val in enumerate(result):
+                groups_string += "<br/>Cluster " + str(i+1) + ":<br/>"
+                groups_string += str(list(val)) + "<br/>"
+
+            return '''
+                <html>
+
+                    <head>
+                        <h1>Smart Clusters:</h1>
+                    </head>
+
+                    <body>
+                        <p> {groups_string} </p>
+                        <p><a href="/">Click here to cluster again!</a></p>
+                    </body>
+
+                </html>
+            '''.format(groups_string=groups_string)
+    return """
+        <html>
+            <body>
+                <h1>Generate Smart Clusters!!</h1>
+
+                <h2>Choose Specifications:</h2>
+
+                <form method="post" action = "." enctype="multipart/form-data">
+                    <p>Upload the CSV Here:</p>
+                    <input type="file" name="data_file" />
+
+                    <p>Enter the Section (Class Period) Here:</p>
+                    <p><input name="section_id" /></p>
+
+                    <p>Choose Number of Clusters to Form:</p>
+                    <p><input name="num_clusters" /></p>
+
+                    <p><input type="submit" value="Submit Specifications" /></p>
+                </form>
+
+            </body>
+        </html>
+    """
+
 
 @app.route('/form')
 def form():
