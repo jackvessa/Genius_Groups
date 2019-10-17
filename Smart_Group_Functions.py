@@ -165,6 +165,9 @@ def clean_file_all_assignments(dataframe,sectionID):
     df = dataframe
     df.drop(df.index[0], inplace=True)
 
+    df['Section'] = df.Section.str.extract('(\d+)')
+    df = df[df['Section']==sectionID]
+
     df.set_index(keys=df['Student'],inplace=True)
 
     df.drop(index = ['Test Student'], inplace=True)
@@ -176,12 +179,11 @@ def clean_file_all_assignments(dataframe,sectionID):
     df.drop(columns=['Assignments Current Score','Imported Assignments Final Score','Imported Assignments Unposted Final Score','Current Points','Final Points'],inplace=True)
 
     # Parse out Section Number
-    df['Section'] = df.Section.str.extract('(\d+)')
+
     df = df.loc[:, df.isnull().mean() < .4]
     df.fillna(0,inplace=True)
-    df['Current Score'] = df['Current Score'].apply(lambda x: float(x))
-
-    class_df = df[df['Section']==sectionID]
+    class_df = df.copy()
+    class_df['Current Score'] = df['Current Score'].apply(lambda x: float(x))
 
     return class_df
 
