@@ -57,7 +57,7 @@ def group():
                 groups_string += "<br/>Group " + str(i+1) + ":<br/>"
                 groups_string += str(list(val)) + "<br/>"
                 groups_string += ("Score Range: " +
-                    str(round((np.max(student_df.loc[val]['score'])-np.min(student_df.loc[val]['score']))*100,3)) +"%")
+                    str(round((np.max(student_df.loc[val]['score'])-np.min(student_df.loc[val]['score']))*100,3)) +"%<br/>")
             return '''
                 <html>
 
