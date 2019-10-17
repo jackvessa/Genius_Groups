@@ -56,8 +56,10 @@ def group():
             for i,val in enumerate(result):
                 groups_string += "<br/>Group " + str(i+1) + ":<br/>"
                 groups_string += str(list(val)) + "<br/>"
+                groups_string += ("Average Score: " +
+                    str(round((np.mean(student_df.loc[val]['score']))*100,2)) +"%<br/>")
                 groups_string += ("Score Range: " +
-                    str(round((np.max(student_df.loc[val]['score'])-np.min(student_df.loc[val]['score']))*100,3)) +"%<br/>")
+                    str(round((np.max(student_df.loc[val]['score'])-np.min(student_df.loc[val]['score']))*100,2)) +"%<br/>")
             return '''
                 <html>
 
