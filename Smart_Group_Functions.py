@@ -148,7 +148,7 @@ def generate_optimized_groups(student_df, num_iter = 100, num_groups = 6, Homoge
     return best_group
 
 
-def clean_file_all_assignments(fileName,sectionID):
+def clean_file_all_assignments(dataframe,sectionID):
     '''
     Clean CSV file
     --------------------
@@ -162,7 +162,7 @@ def clean_file_all_assignments(fileName,sectionID):
     ---------
     Pandas DataFrame (Cleaned)
     '''
-    df = pd.read_csv(fileName, encoding='latin-1')
+    df = dataframe
     df.drop(df.index[0], inplace=True)
 
     df.set_index(keys=df['Student'],inplace=True)
