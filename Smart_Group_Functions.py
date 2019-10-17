@@ -77,7 +77,7 @@ def normalize_df(df):
         if np.min(x) != np.max(x) else x)
 
 
-def generate_optimized_groups(student_df, num_iter = 100, num_groups = 6, Homogeneous = 0):
+def generate_optimized_groups(student_df, num_iter = 100, num_groups = 6, Homogeneous = 0, criteria = 'score'):
     '''
 
     Parameters
@@ -119,10 +119,10 @@ def generate_optimized_groups(student_df, num_iter = 100, num_groups = 6, Homoge
         for group in group_set:
             unfrozen = set(group)
             group_loss = 0
-            avg_score = np.mean(student_df.loc[unfrozen]['score'])
+            avg_score = np.mean(student_df.loc[unfrozen][criteria])
 
             for s in range(len(group)):
-                group_loss += (student_df.loc[unfrozen]['score'][s] - avg_score) ** 2
+                group_loss += (student_df.loc[unfrozen][criteria][s] - avg_score) ** 2
 
             total_loss += group_loss
 
@@ -143,9 +143,48 @@ def generate_optimized_groups(student_df, num_iter = 100, num_groups = 6, Homoge
 
     for i,g in enumerate(best_group):
         print("Group",i+1)
-        print(student_df.loc[set(g)]['score'],"\n")
+        print(student_df.loc[set(g)][criteria],"\n")
 
     return best_group
+
+
+def clean_file_all_assignments(fileName,sectionID):
+    '''
+    Clean CSV file
+    --------------------
+
+    Parameters
+    -----------
+    .csv file :
+    sectionID : Class/Period Number to Group
+
+    Returns
+    ---------
+    Pandas DataFrame (Cleaned)
+    '''
+    df = pd.read_csv(fileName, encoding='latin-1')
+    df.drop(df.index[0], inplace=True)
+
+    df.set_index(keys=df['Student'],inplace=True)
+
+    df.drop(index = ['Test Student'], inplace=True)
+
+    df.drop(columns=['Student','ID','SIS User ID','SIS Login ID'],inplace=True)
+    df.drop(columns=['Assignments Current Points','Assignments Final Points','Assignments Unposted Current Score','Assignments Final Score'],inplace=True)
+    df.drop(columns=['Assignments Unposted Final Score','Imported Assignments Current Points','Imported Assignments Final Points','Imported Assignments Current Score'],inplace=True)
+    df.drop(columns=['Imported Assignments Unposted Current Score','Unposted Final Score','Final Score','Unposted Current Score'],inplace=True)
+    df.drop(columns=['Assignments Current Score','Imported Assignments Final Score','Imported Assignments Unposted Final Score','Current Points','Final Points'],inplace=True)
+
+    # Parse out Section Number
+    df['Section'] = df.Section.str.extract('(\d+)')
+    df = df.loc[:, df.isnull().mean() < .4]
+    df.fillna(0,inplace=True)
+    df['Current Score'] = df['Current Score'].apply(lambda x: float(x))
+
+    class_df = df[df['Section']==sectionID]
+
+    return class_df
+
 
 def add_clusters(df, num_clusters=6):
     '''
