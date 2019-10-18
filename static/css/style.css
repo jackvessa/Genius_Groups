@@ -8,6 +8,12 @@ ul {
   font-size: 3em;
 }
 
+h1 {
+  margin-block-start: 0.25em;
+  margin-block-end: 0.25em;
+}
+
+
 body h1 {
   font-size: 5em;
   color: blue;
