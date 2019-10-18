@@ -279,20 +279,20 @@ def cluster_question_topics(quest_list,num_clust = 3,num_top_words = 3,stop_word
     X = vectorizer.fit_transform(quest_list)
     means = KMeans(num_clust,).fit(X)
 
-    print("Top terms per cluster:")
     order_centroids = means.cluster_centers_.argsort()[:, ::-1]
     terms = vectorizer.get_feature_names()
 
-    string_results = ""
-    for i in range(num_clust):
-        print("\nCluster {}:".format(str(i+1)))
-        string_results += ("\nCluster {}:".format(str(i+1)))
-        for ind in order_centroids[i, :num_top_words]:
-            print(' %s' % terms[ind])
-            string_results += (' %s' % terms[ind])
-    print(means.labels_)
+    topics_dict = dict()
 
-    return (string_results, np.array(means.labels_))
+    for i in range(num_clust):
+
+        topics_dict[i] = []
+
+        for ind in order_centroids[i, :num_top_words]:
+
+            topics_dict[i].append(terms[ind])
+
+    return (topics_dict, np.array(means.labels_))
 
 
 # Make Student Strength/Growth Areas DataFrame
@@ -312,7 +312,7 @@ def make_student_growth_and_strength_df(df_original,sectionID,cluster_labels):
     Pandas DataFrame with strengths and growth areas for question clusters
 
     '''
-    df = df_original.copy()    
+    df = df_original.copy()
     clean_df = clean_file(df,sectionID)
     quest_num_df = clean_df.iloc[:,0:-3]
     quest_num_df.columns = cluster_labels

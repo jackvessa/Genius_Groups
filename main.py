@@ -400,7 +400,7 @@ def cluster_questions():
 
         if section_id is not None and num_clusters is not None and strength_bool is not None:
             quest_list = create_questions_list(data_frame)
-            str_results, labels = cluster_question_topics(quest_list, num_clust = num_clusters)
+            topics_dict, labels = cluster_question_topics(quest_list, num_clust = num_clusters)
 
             strength_and_growth_df = make_student_growth_and_strength_df(data_frame,section_id,labels)
 
@@ -419,9 +419,13 @@ def cluster_questions():
                 if strength_bool == 0:
                     groups_string += ("Strength Area Questions: " +
                         str(quest_dict[i]) + "<br/>")
+                    groups_string += ("Question Cluster Topics: " +
+                        str(topics_dict[i]) + "<br/>")
                 else:
                     groups_string += ("Growth Area Questions: " +
                         str(quest_dict[i]) + "<br/>")
+                    groups_string += ("Question Cluster Topics: " +
+                        str(topics_dict[i]) + "<br/>")
             return '''
                 <html>
 
