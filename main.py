@@ -418,7 +418,7 @@ def cluster_questions():
                 groups_string += str(list(val)) + "<br/>"
                 if strength_bool == 0:
                     groups_string += ("Strength Area Questions: " +
-                        str(quest_dict[i+1]) + "<br/>")
+                        str(quest_dict[i]) + "<br/>")
                 else:
                     groups_string += ("Growth Area Questions: " +
                         str(quest_dict[i]) + "<br/>")
