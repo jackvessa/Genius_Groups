@@ -1,6 +1,10 @@
 import numpy as np
 import pandas as pd
 from sklearn.cluster import KMeans
+# Imports for NLP Analysis of Columns
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.feature_extraction import text
+from sklearn.cluster import KMeans
 
 # csv_file = 'Data/Exam 2_ Tissues (Closed EB) Quiz Student Analysis Report.csv'
 # csv_file = 'Data/Exam 1_ Part 2 Quiz Student Analysis Report.csv'
@@ -386,7 +390,7 @@ def generate_strength_groups(df,num_groups):
         print(str(g)+"\n")
 
     return cluster_focus
- 
+
 # Turns Labeled Question Array to Dictionary
 def labels_to_dict(labels):
     '''
