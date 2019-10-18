@@ -24,6 +24,10 @@ body p {
 
 }
 
+p {
+  margin-block-start: .25em;
+  margin-block-end: .25em;
+}
 
 h4 {
   margin-left: -10px;
