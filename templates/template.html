@@ -10,14 +10,20 @@
   <body>
      <header>
        <div class="container">
-         <h1 class="logo">Welcome to Smart Grouping!</h1>
+         <h1 class="logo">Welcome to Smart Groups!</h1>
          <strong><nav>
            <ul class="menu">
-             <li><a href="{{ url_for('group') }}">Group (Single Assignment)</a></li>
-             <li><a href="{{ url_for('group_all') }}">Group (Full Gradebook)</a></li>
-             <li><a href="{{ url_for('cluster') }}">Cluster (Single Assignment)</a></li>
-             <li><a href="{{ url_for('cluster_all') }}">Cluster (Full Gradebook)</a></li>
-             <li><a href="{{ url_for('cluster_questions') }}">Cluster Students By Questions</a></li>
+             <p class = "list_header">Download Example CSVs (CANVAS Template)</p>
+             <li><a href="{{ url_for('example_csvs') }}">Single Assignment CSV</a></li>
+             <li><a href="{{ url_for('example_csvs_full') }}">Full Gradebook CSV</a></li>
+             <p class = "list_header">Single Assignment Functions</p>
+             <li><a href="{{ url_for('group') }}">Group (Single)</a></li>
+             <li><a href="{{ url_for('cluster_questions') }}">Cluster Students By Strength/Growth Areas (Single)</a></li>
+             <li><a href="{{ url_for('cluster') }}">Cluster (Single)</a></li>
+
+             <p class = "list_header">Full Gradebook Functions</p>
+             <li><a href="{{ url_for('group_all') }}">Group (Full)</a></li>
+             <li><a href="{{ url_for('cluster_all') }}">Cluster (Full)</a></li>
            </ul>
          </nav></strong>
        </div>

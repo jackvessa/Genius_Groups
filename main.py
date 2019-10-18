@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, make_response
+from flask import Flask, render_template, request, make_response, send_file
 import numpy as np
 import pandas as pd
 from Smart_Group_Functions import *
@@ -16,6 +16,35 @@ app = Flask(__name__)
 @app.route('/', methods=["GET", "POST"])
 def home():
     return render_template("template.html")
+
+@app.route('/getExampleCSVs/') # this is a job for GET, not POST
+def example_csvs():
+    return send_file('Example_CSVs/Superhero_Single_Assignment.csv',
+                     mimetype='text/csv',
+                     attachment_filename='Single_Superheroes_Assignment.csv',
+                     as_attachment=True)
+
+# @app.route('/getExampleCSV/') # this is a job for GET, not POST
+# def example_csv():
+#     return send_file('Example_CSVs/Superhero_Single_Assignments',
+#                      mimetype='text/csv',
+#                      attachment_filename='Single_Superheroes_Assignment.csv',
+#                      as_attachment=True)
+
+@app.route('/getExampleCSVsfull/') # this is a job for GET, not POST
+def example_csvs_full():
+    return send_file('Example_CSVs/Superhero_All_Assignments.csv',
+                     mimetype='text/csv',
+                     attachment_filename='All_Superheroe_Assignments.csv',
+                     as_attachment=True)
+
+# @app.route('/getExampleCSVfull/') # this is a job for GET, not POST
+# def example_csv_full():
+#     return send_file('Example_CSVs/Superhero_All_Assignments.csv',
+#                      mimetype='text/csv',
+#                      attachment_filename='All_Superheroe_Assignments.csv',
+#                      as_attachment=True)
+
 
 @app.route('/group/', methods=["GET", "POST"])
 def group():
@@ -79,6 +108,7 @@ def group():
             '''.format(groups_string=groups_string)
     return """
         <html>
+            <link rel="stylesheet" href="{{ url_for('static',    filename='css/style.css') }}">
 
               <head>
                 <meta charset="utf-8">

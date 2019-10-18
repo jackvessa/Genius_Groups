@@ -13,8 +13,34 @@ body h1 {
   color: blue;
 }
 
+body p {
+  color: green;
+
+}
+
+
+h4 {
+  margin-left: -10px;
+  font-size: 1em;
+}
+
+head {
+  color: blue;
+
+}
+
 .logo {
   background-color: #0D122B;
-  padding: 15px;
+  padding: 10px;
   color: white;
+  text-align: center
+}
+
+.list_header {
+  color: black;
+  font-style: italic;
+}
+
+li {
+    font-size: 0.75em;
 }
