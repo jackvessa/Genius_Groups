@@ -421,7 +421,7 @@ def cluster_questions():
                         str(quest_dict[i+1]) + "<br/>")
                 else:
                     groups_string += ("Growth Area Questions: " +
-                        str(quest_dict[i+1]) + "<br/>")
+                        str(quest_dict[i]) + "<br/>")
             return '''
                 <html>
 
