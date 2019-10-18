@@ -57,7 +57,7 @@ def clean_file(dataframe,sectionID):
     '''
     sectionID = str(sectionID)
 
-    df = dataframe
+    df = dataframe.copy()
     df.set_index(keys=df['name'],inplace=True)
 
     df['section'] = df.section.str.extract('(\d+)')
@@ -172,7 +172,7 @@ def clean_file_all_assignments(dataframe,sectionID):
     Pandas DataFrame (Cleaned)
     '''
     sectionID = str(sectionID)
-    df = dataframe
+    df = dataframe.copy()
     df.drop(df.index[0], inplace=True)
 
     df.set_index(keys=df['Student'],inplace=True)
