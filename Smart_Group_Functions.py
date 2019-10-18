@@ -222,7 +222,7 @@ def return_cluster_list(df,num_clusters=6):
 ## NLP Clustering of Questions
 
 # Create a List of Question Strings
-def create_questions_list(df, cols=['id','sis_id','section_id','section_sis_id','submitted','attempt','score','name','section']):
+def create_questions_list(df_original, cols=['id','sis_id','section_id','section_sis_id','submitted','attempt','score','name','section']):
     '''
     Takes DataFrame and creates a NumPy array.
 
@@ -235,6 +235,7 @@ def create_questions_list(df, cols=['id','sis_id','section_id','section_sis_id',
     -------
     List of Questions
     '''
+    df = df_original.copy()
     df.drop(columns=cols,inplace=True)
     df = df.select_dtypes(exclude=['float'])
     df = df.select_dtypes(exclude=['int'])
@@ -295,7 +296,7 @@ def cluster_question_topics(quest_list,num_clust = 3,num_top_words = 3,stop_word
 
 
 # Make Student Strength/Growth Areas DataFrame
-def make_student_growth_and_strength_df(df,sectionID,cluster_labels):
+def make_student_growth_and_strength_df(df_original,sectionID,cluster_labels):
     '''
     Create a DataFrame that includes students strengths and growth areas for question clusters
 
@@ -311,6 +312,7 @@ def make_student_growth_and_strength_df(df,sectionID,cluster_labels):
     Pandas DataFrame with strengths and growth areas for question clusters
 
     '''
+    df = df_original.copy()    
     clean_df = clean_file(df,sectionID)
     quest_num_df = clean_df.iloc[:,0:-3]
     quest_num_df.columns = cluster_labels
