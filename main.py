@@ -35,7 +35,7 @@ def example_csvs():
 def example_csvs_full():
     return send_file('Example_CSVs/Superhero_All_Assignments.csv',
                      mimetype='text/csv',
-                     attachment_filename='All_Superheroe_Assignments.csv',
+                     attachment_filename='Full_Superheroes_Gradebook.csv',
                      as_attachment=True)
 
 # @app.route('/getExampleCSVfull/') # this is a job for GET, not POST
@@ -94,8 +94,8 @@ def group():
                 <html>
 
                     <head>
-                        <title>Smart Grouping Results</title>
-                        <h1>Smart Groups:</h1>
+                        <title>Smart Grouping Results (Single Assignment)</title>
+                        <h1>Smart Groups (Based on Single Assignment):</h1>
                         <link rel="stylesheet" href="{{ url_for('static',    filename='css/style.css') }}">
                     </head>
 
@@ -119,15 +119,16 @@ def group():
               </head>
 
             <body>
-                <h1>Generate Smart Groups!</h1>
+                <h1>Generate Smart Groups (Based on Single Assignment)!</h1>
 
                 <h2>Choose Specifications:</h2>
 
                 <form method="post" action = "." enctype="multipart/form-data">
-                    <p>Upload the CSV Here:</p>
+                    <p>Upload the CSV Here (Single Assignment):</p>
                     <input type="file" name="data_file" />
 
                     <p>Enter the Section (Class Period) Here:</p>
+                    <p>* For Example CSV Options are 4 or 6 *</p>
                     <p><input name="section_id" /></p>
 
                     <p>Choose Number of Groups to Form:</p>
@@ -195,7 +196,7 @@ def group_all():
 
                     <head>
                         <title>Smart Grouping Results</title>
-                        <h1>Smart Groups:</h1>
+                        <h1>Smart Groups (Full Gradebook):</h1>
                         <link rel="stylesheet" href="{{ url_for('static',    filename='css/style.css') }}">
                     </head>
 
@@ -218,15 +219,16 @@ def group_all():
               </head>
 
             <body>
-                <h1>Generate Smart Groups!</h1>
+                <h1>Generate Smart Groups (Based on Full Gradebook)!</h1>
 
                 <h2>Choose Specifications:</h2>
 
                 <form method="post" action = "." enctype="multipart/form-data">
-                    <p>Upload the CSV Here:</p>
+                    <p>Upload the CSV Here (Full):</p>
                     <input type="file" name="data_file" />
 
                     <p>Enter the Section (Class Period) Here:</p>
+                    <p>* For Example CSV Options are 2 or 3 *</p>
                     <p><input name="section_id" /></p>
 
                     <p>Choose Number of Groups to Form:</p>
@@ -298,15 +300,16 @@ def cluster():
     return """
         <html>
             <body>
-                <h1>Generate Smart Clusters!!</h1>
+                <h1>Generate Smart Clusters (Single Assignment)!</h1>
 
                 <h2>Choose Specifications:</h2>
 
                 <form method="post" action = "." enctype="multipart/form-data">
-                    <p>Upload the CSV Here:</p>
+                    <p>Upload the CSV Here (Single):</p>
                     <input type="file" name="data_file" />
 
                     <p>Enter the Section (Class Period) Here:</p>
+                    <p>* For Example CSV Options are 4 or 6 *</p>
                     <p><input name="section_id" /></p>
 
                     <p>Choose Number of Clusters to Form:</p>
@@ -362,7 +365,7 @@ def cluster_all():
                 <html>
 
                     <head>
-                        <h1>Smart Clusters:</h1>
+                        <h1>Smart Clusters (Full Gradebook):</h1>
                     </head>
 
                     <body>
@@ -375,7 +378,7 @@ def cluster_all():
     return """
         <html>
             <body>
-                <h1>Generate Smart Clusters!!</h1>
+                <h1>Generate Smart Clusters (Full Gradebook)!</h1>
 
                 <h2>Choose Specifications:</h2>
 
@@ -384,6 +387,7 @@ def cluster_all():
                     <input type="file" name="data_file" />
 
                     <p>Enter the Section (Class Period) Here:</p>
+                    <p>* For Example CSV Options are 2 or 3 *</p>
                     <p><input name="section_id" /></p>
 
                     <p>Choose Number of Clusters to Form:</p>
@@ -459,7 +463,7 @@ def cluster_questions():
                 <html>
 
                     <head>
-                        <h1>Smart Clusters:</h1>
+                        <h1>Smart Clusters (Single Assignment):</h1>
                     </head>
 
                     <body>
@@ -472,7 +476,7 @@ def cluster_questions():
     return """
         <html>
             <body>
-                <h1>Generate Smart Clusters!!</h1>
+                <h1>Generate Smart Clusters (Based on Single Assignment)!</h1>
 
                 <h2>Choose Specifications:</h2>
 
@@ -481,6 +485,7 @@ def cluster_questions():
                     <input type="file" name="data_file" />
 
                     <p>Enter the Section (Class Period) Here:</p>
+                    <p>* For Example CSV Options are 4 or 6 *</p>
                     <p><input name="section_id" /></p>
 
                     <p>Choose Number of Clusters to Form:</p>
