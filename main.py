@@ -366,6 +366,104 @@ def cluster_all():
     """
 
 
+@app.route('/cluster_questions/', methods=["GET", "POST"])
+def cluster_questions():
+    errors = ""
+
+    if request.method == "POST":
+
+        section_id = None
+        num_clusters = None
+        data_frame = None
+
+        file = request.files['data_file']
+        if not file:
+            return "No file"
+        tempfile_path = tempfile.NamedTemporaryFile().name
+        file.save(tempfile_path)
+        data_frame = pd.read_csv(tempfile_path, encoding='latin-1')
+
+        try:
+            section_id = int(request.form["section_id"])
+        except:
+            errors += "<p>{!r} is not a number!</p>\n".format(request.form["section_id"])
+        try:
+            num_clusters = int(request.form["num_clusters"])
+        except:
+            errors += "<p>{!r} is not a number!</p>\n".format(request.form["num_clusters"])
+        try:
+            strength_bool = int(request.form["strength_bool"])
+        except:
+            errors += "<p>{!r} is not a number!</p>\n".format(request.form["strength_bool"])
+
+
+        if section_id is not None and num_clusters is not None and strength_bool is not None:
+            quest_list = create_questions_list(data_frame)
+            str_results, labels = cluster_question_topics(quest_list, num_clust = num_clusters)
+
+            strength_and_growth_df = make_student_growth_and_strength_df(data_frame,section_id,labels)
+
+            if strength_bool == 0:
+                clust_groups = generate_strength_groups(strength_and_growth_df,num_clusters)
+            else:
+                clust_groups = generate_growth_groups(strength_and_growth_df,num_clusters)
+
+            quest_dict = labels_to_dict(labels)
+
+            groups_string = ""
+            groups_string += str_results
+            for i,val in enumerate(clust_groups):
+                groups_string += "<br/>Cluster " + str(i+1) + ":<br/>"
+                groups_string += str(list(val)) + "<br/>"
+                if strength_bool == 0:
+                    groups_string += ("Strength Area Questions: " +
+                        str(quest_dict[i+1]) + "<br/>")
+                else:
+                    groups_string += ("Growth Area Questions: " +
+                        str(quest_dict[i+1]) + "<br/>")
+            return '''
+                <html>
+
+                    <head>
+                        <h1>Smart Clusters:</h1>
+                    </head>
+
+                    <body>
+                        <p> {groups_string} </p>
+                        <p><a href="/">Click here to cluster again!</a></p>
+                    </body>
+
+                </html>
+            '''.format(groups_string=groups_string)
+    return """
+        <html>
+            <body>
+                <h1>Generate Smart Clusters!!</h1>
+
+                <h2>Choose Specifications:</h2>
+
+                <form method="post" action = "." enctype="multipart/form-data">
+                    <p>Upload the CSV Here:</p>
+                    <input type="file" name="data_file" />
+
+                    <p>Enter the Section (Class Period) Here:</p>
+                    <p><input name="section_id" /></p>
+
+                    <p>Choose Number of Clusters to Form:</p>
+                    <p><input name="num_clusters" /></p>
+
+                    <p>Enter 0 for "Strength" Groups  <br> or 1 for "Growth Area" Groups :</p>
+                    <p><input name="strength_bool" /></p>
+
+                    <p><input type="submit" value="Submit Specifications" /></p>
+                </form>
+
+            </body>
+        </html>
+    """
+
+
+
 @app.route('/form')
 def form():
     return render_template('form.html')

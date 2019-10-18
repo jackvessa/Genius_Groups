@@ -387,6 +387,28 @@ def generate_strength_groups(df,num_groups):
 
     return cluster_focus
  
+# Turns Labeled Question Array to Dictionary
+def labels_to_dict(labels):
+    '''
+    Takes clustered question labels and returns dictionary with cluster as key and question #'s as values
+
+    Parameters
+    ----------
+    labels : list of question labels
+
+    Returns
+    -------
+    Dictionary with question cluster as key and question #'s as values
+    '''
+    quest_dict = dict()
+
+    for i, val in enumerate(labels):
+        if val in quest_dict:
+            quest_dict[val].append(i+1)
+        else:
+            quest_dict[val] = ([i+1])
+
+    return quest_dict
 
 
 if __name__ == "__main__":
