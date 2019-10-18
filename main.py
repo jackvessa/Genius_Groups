@@ -412,7 +412,6 @@ def cluster_questions():
             quest_dict = labels_to_dict(labels)
 
             groups_string = ""
-            groups_string += str_results
             for i,val in enumerate(clust_groups):
                 groups_string += "<br/>Cluster " + str(i+1) + ":<br/>"
                 groups_string += str(list(val)) + "<br/>"
