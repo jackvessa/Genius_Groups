@@ -1,9 +1,10 @@
 from flask import Flask, render_template, request, make_response
 import numpy as np
 import pandas as pd
-from Smart_Group_Functions import (calc_group_sizes, clean_file, normalize_df,
-generate_optimized_groups, add_clusters, return_cluster_list,
-clean_file_all_assignments)
+from Smart_Group_Functions import *
+# (calc_group_sizes, clean_file, normalize_df,
+# generate_optimized_groups, add_clusters, return_cluster_list,
+# clean_file_all_assignments, )
 import io
 import csv
 import tempfile
