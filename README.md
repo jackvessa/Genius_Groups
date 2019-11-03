@@ -1,4 +1,4 @@
-# Smart Groups
+# Genius Groups
 
 ## Project Motivation
 
@@ -36,9 +36,9 @@ Teachers can choose Homogenous (similar scores) or Heterogeneous (different scor
 ## Tools Used
 - Python
 - Flask
+- Amazon Web Services
 
 
 ## Acknowledgments
 
 * Thank you to all the teachers who have positively impacted my life
-* This project is one attempt to improve the lives of the heroes who continue to do the good work
