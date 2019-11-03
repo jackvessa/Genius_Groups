@@ -1,10 +1,8 @@
 from flask import Flask, render_template, request, make_response, send_file
 import numpy as np
 import pandas as pd
-from Smart_Group_Functions import *
-# (calc_group_sizes, clean_file, normalize_df,
-# generate_optimized_groups, add_clusters, return_cluster_list,
-# clean_file_all_assignments, )
+from src.Genius_Group_Functions import *
+
 import io
 import csv
 import tempfile
@@ -94,8 +92,8 @@ def group():
                 <html>
 
                     <head>
-                        <title>Smart Grouping Results (Single Assignment)</title>
-                        <h1>Smart Groups (Based on Single Assignment):</h1>
+                        <title>Genius Grouping Results (Single Assignment)</title>
+                        <h1>Genius Groups (Based on Single Assignment):</h1>
                         <link rel="stylesheet" href="{{ url_for('static',    filename='css/style.css') }}">
                     </head>
 
@@ -112,14 +110,14 @@ def group():
 
               <head>
                 <meta charset="utf-8">
-                <title>Smart Grouping Setup</title>
+                <title>Genius Grouping Setup</title>
 
                 <link rel="stylesheet" href="{{ url_for('static',    filename='css/style.css') }}">
 
               </head>
 
             <body>
-                <h1>Generate Smart Groups (Based on Single Assignment)!</h1>
+                <h1>Generate Genius Groups (Based on Single Assignment)!</h1>
 
                 <h2>Choose Specifications:</h2>
 
@@ -195,8 +193,8 @@ def group_all():
                 <html>
 
                     <head>
-                        <title>Smart Grouping Results</title>
-                        <h1>Smart Groups (Full Gradebook):</h1>
+                        <title>Genius Grouping Results</title>
+                        <h1>Genius Groups (Full Gradebook):</h1>
                         <link rel="stylesheet" href="{{ url_for('static',    filename='css/style.css') }}">
                     </head>
 
@@ -212,14 +210,14 @@ def group_all():
 
               <head>
                 <meta charset="utf-8">
-                <title>Smart Grouping Setup</title>
+                <title>Genius Grouping Setup</title>
 
                 <link rel="stylesheet" href="{{ url_for('static',    filename='css/style.css') }}">
 
               </head>
 
             <body>
-                <h1>Generate Smart Groups (Based on Full Gradebook)!</h1>
+                <h1>Generate Genius Groups (Based on Full Gradebook)!</h1>
 
                 <h2>Choose Specifications:</h2>
 
@@ -287,7 +285,7 @@ def cluster():
                 <html>
 
                     <head>
-                        <h1>Smart Clusters:</h1>
+                        <h1>Genius Clusters:</h1>
                     </head>
 
                     <body>
@@ -300,7 +298,7 @@ def cluster():
     return """
         <html>
             <body>
-                <h1>Generate Smart Clusters (Single Assignment)!</h1>
+                <h1>Generate Genius Clusters (Single Assignment)!</h1>
 
                 <h2>Choose Specifications:</h2>
 
@@ -365,7 +363,7 @@ def cluster_all():
                 <html>
 
                     <head>
-                        <h1>Smart Clusters (Full Gradebook):</h1>
+                        <h1>Genius Clusters (Full Gradebook):</h1>
                     </head>
 
                     <body>
@@ -378,7 +376,7 @@ def cluster_all():
     return """
         <html>
             <body>
-                <h1>Generate Smart Clusters (Full Gradebook)!</h1>
+                <h1>Generate Genius Clusters (Full Gradebook)!</h1>
 
                 <h2>Choose Specifications:</h2>
 
@@ -463,7 +461,7 @@ def cluster_questions():
                 <html>
 
                     <head>
-                        <h1>Smart Clusters (Single Assignment):</h1>
+                        <h1>Genius Clusters (Single Assignment):</h1>
                     </head>
 
                     <body>
@@ -476,7 +474,7 @@ def cluster_questions():
     return """
         <html>
             <body>
-                <h1>Generate Smart Clusters (Based on Single Assignment)!</h1>
+                <h1>Generate Genius Clusters (Based on Single Assignment)!</h1>
 
                 <h2>Choose Specifications:</h2>
 
