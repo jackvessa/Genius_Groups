@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Genius Grouping Homepage</title>
+
+    <link rel="stylesheet" href="{{ url_for('static',    filename='css/style.css') }}">
+
+  </head>
+  <body>
+     <header>
+       <div class="container">
+         <h1 class="logo">Welcome to Genius Groups!</h1>
+         <strong><nav>
+           <ul class="menu">
+             <p class = "list_header">Download Example CSVs (CANVAS Template)</p>
+             <li><a href="{{ url_for('example_csvs') }}">Single Assignment CSV</a></li>
+             <li><a href="{{ url_for('example_csvs_full') }}">Full Gradebook CSV</a></li>
+
+             <p class = "list_header">Single Assignment Functions</p>
+             <li><a href="{{ url_for('group') }}">Group (Single)</a></li>
+             <li><a href="{{ url_for('cluster_questions') }}">Cluster Students By Strength/Growth Areas (Single)</a></li>
+             <li><a href="{{ url_for('cluster') }}">Cluster (Single)</a></li>
+
+             <p class = "list_header">Full Gradebook Functions</p>
+             <li><a href="{{ url_for('group_all') }}">Group (Full)</a></li>
+             <li><a href="{{ url_for('cluster_all') }}">Cluster (Full)</a></li>
+           </ul>
+         </nav></strong>
+       </div>
+     </header>
+
+     {% block content %}
+     {% endblock %}
+
+  </body>
+</html>
